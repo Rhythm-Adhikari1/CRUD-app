@@ -26,7 +26,7 @@ def get_db():
 
 while True:
     try:
-        conn = psycopg2.connect(host = 'localhost', database = 'fastapi', user = 'postgres', password= 'adhikari',
+        conn = psycopg2.connect(host = settings.database_hostname, database = settings.database_name, user = settings.database_username, password= settings.database_password,
                                 cursor_factory= RealDictCursor )
         
         cursor = conn.cursor()
