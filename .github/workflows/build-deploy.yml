@@ -19,9 +19,9 @@ jobs:
       DATABASE_USERNAME: testuser
       DATABASE_PASSWORD: testpass
       DATABASE_NAME: testdb
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      ALGORITHM: ${{ secrets.ALGORITHM }}
-      ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
+      SECRET_KEY: ${{ SECRET_KEY }}
+      ALGORITHM: ${{ ALGORITHM }}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${{ ACCESS_TOKEN_EXPIRE_MINUTES }}
 
     services:
       postgres:
