@@ -17,7 +17,7 @@ jobs:
       DATABASE_PORT: 5432
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: testpass
-      DATABASE_NAME: testname_test
+      DATABASE_NAME: testname_test_test
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       ALGORITHM: ${{ secrets.ALGORITHM }}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
