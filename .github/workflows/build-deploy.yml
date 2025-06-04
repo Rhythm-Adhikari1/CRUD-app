@@ -32,7 +32,7 @@ jobs:
           POSTGRES_PASSWORD: testpass
           POSTGRES_DB: testname_test
         options: >-
-          --health-cmd pg isready
+          --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
