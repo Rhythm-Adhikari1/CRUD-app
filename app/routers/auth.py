@@ -9,8 +9,10 @@ router = APIRouter(tags = ['Authentication'])
 def login( user_credentials : OAuth2PasswordRequestForm = Depends(), db: Session = Depends(database.get_db) ):
     
 
-
-    user = db.query(models.User).filter(models.User.email == user_credentials.username).first()
+    if not user_credentials.username or not user_credentials.password:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Validation Error")
+    
+    user = db.query(models.User).filter(models.User.email == user_credentials.username).first() # type: ignore
 
     if not user:
         raise HTTPException(status_code= status.HTTP_403_FORBIDDEN, detail = f"Invalid Credentials")
