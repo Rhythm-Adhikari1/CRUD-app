@@ -3,16 +3,16 @@ name: Build and Deploy Code
 on: 
   push:
     branches: 
-      - "master"
+      - master
   pull_request:
     branches:
-      - "master"
+      - master
 
 jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      -name: pulling git repo
+      - name: pulling git repo
         uses: actions/checkout@v2
       - name: say hi to Rhythm
         run: echo "Hi Rhythm, this is your GitHub Action workflow!"
