@@ -21,7 +21,7 @@ services:
       - SECRET_KEY=${SECRET_KEY}
       - ALGORITHM=${ALGORITHM}
       - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES}
-  postgres:
+   postgres:
     image: postgres
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
