@@ -13,18 +13,18 @@ jobs:
     environment: 
       name: testing
     env:
-      DATABASE_HOSTNAME: ${{ secrets.DATABASE_HOSTNAME }}
-      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+      DATABASE_HOSTNAME: localhost
+      DATABASE_PORT: 5432
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: testpass
-      DATABASE_NAME: testname
+      DATABASE_NAME: testname_test
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       ALGORITHM: ${{ secrets.ALGORITHM }}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
 
     services:
       postgres:
-        image: postgres:latest
+        image: postgres:15
         ports:
           - 5432:5432
         env:
@@ -32,24 +32,26 @@ jobs:
           POSTGRES_PASSWORD: testpass
           POSTGRES_DB: testname_test
         options: >-
-          --health-cmd "pg_isready -U testuser"
+          --health-cmd "pg_isready -U postgres"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
 
     runs-on: ubuntu-latest
     steps:
-      - name: pulling git repo
+      - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Install python version 3.12
-        uses: actions/setup-python@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.12'
-      - name: update pip
+
+      - name: Upgrade pip
         run: python -m pip install --upgrade pip
+
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: test with pytest
-        run: |
-          pip install pytest
-          pytest
+
+      - name: Run tests with pytest
+        run: pytest
