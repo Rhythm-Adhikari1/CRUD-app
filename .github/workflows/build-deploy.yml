@@ -15,9 +15,9 @@ jobs:
     env:
       DATABASE_HOSTNAME: ${{ secrets.DATABASE_HOSTNAME }}
       DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-      DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
-      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: testpass
+      DATABASE_NAME: testname_test
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       ALGORITHM: ${{ secrets.ALGORITHM }}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
@@ -29,8 +29,8 @@ jobs:
           - 5432:5432
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: adhikari
-          POSTGRES_DB: postgres_test
+          POSTGRES_PASSWORD: testpass
+          POSTGRES_DB: testname_test
         options: >-
           --health-cmd "pg_isready -U testuser"
           --health-interval 10s
