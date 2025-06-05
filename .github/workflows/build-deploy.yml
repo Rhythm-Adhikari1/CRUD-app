@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  job1:
+  build:
     environment: 
       name: testing
     env:
@@ -38,8 +38,8 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: pulling git repo
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -78,3 +78,24 @@ jobs:
           cache-to: type=local,dest=/tmp/buildx-cache
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    environment: 
+      name: production
+    steps:
+    - name: pulling git repo
+        uses: actions/checkout@v3
+    - name: Render Deploy
+    - uses: JorgeLNJunior/render-deploy@v1.4.5
+      with:
+        service_id: ${{ secrets.RENDER_SERVICE_ID }}
+        api_key: ${{ secrets.RENDER_API_KEY }}
+        clear_cache: true # Optional: Clear Render's build cache
+        wait_deploy: true
+        github_deployment: true
+        deployment_environment: 'production'
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
+
+  
